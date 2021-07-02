@@ -27,7 +27,7 @@ CREATE TABLE `transaction` (
   `amount` float NOT NULL,
   `transaction_date` date NOT NULL,
   `tax_amount` float NOT NULL,
-  `total_amount` float GENERATED ALWAYS AS ((`amount` + `tax_amount`)) VIRTUAL,
+  `total_amt` float NOT NULL,
   PRIMARY KEY (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-02 15:09:54
+-- Dump completed on 2021-07-02 21:28:23

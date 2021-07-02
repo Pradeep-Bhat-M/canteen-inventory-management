@@ -29,7 +29,13 @@ CREATE TABLE `orders` (
   `order_date` date NOT NULL,
   `transaction_id` int NOT NULL,
   `status` varchar(45) NOT NULL DEFAULT 'Pending',
-  PRIMARY KEY (`order_id`)
+  PRIMARY KEY (`order_id`),
+  KEY `deptId_idx` (`dept_id`),
+  KEY `supplierId_idx` (`supplier_id`),
+  KEY `transactionId_idx` (`transaction_id`),
+  CONSTRAINT `deptId` FOREIGN KEY (`dept_id`) REFERENCES `department` (`dept_id`),
+  CONSTRAINT `supplierId` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`),
+  CONSTRAINT `transactionId` FOREIGN KEY (`transaction_id`) REFERENCES `transaction` (`transaction_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-02 15:09:53
+-- Dump completed on 2021-07-02 21:28:22

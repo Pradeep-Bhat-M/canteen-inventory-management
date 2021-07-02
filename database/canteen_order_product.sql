@@ -27,10 +27,10 @@ CREATE TABLE `order_product` (
   `product_id` int NOT NULL,
   `quantity` int NOT NULL,
   `rate` float NOT NULL,
-  KEY `order_idx` (`order_id`),
-  KEY `product_idx` (`product_id`),
-  CONSTRAINT `oProduct` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
-  CONSTRAINT `order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `orderId_idx` (`order_id`),
+  KEY `productId_idx` (`product_id`),
+  CONSTRAINT `orderId` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  CONSTRAINT `productId` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-02 15:09:53
+-- Dump completed on 2021-07-02 21:28:23
