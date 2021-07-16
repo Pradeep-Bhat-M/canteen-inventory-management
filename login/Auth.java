@@ -1,6 +1,9 @@
 package database;
 
 import frames.LoginPage;
+import gui.Employee;
+import gui.Supervisor;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,10 +35,7 @@ public class Auth {
 			stmt.setInt(1, userId);
 			stmt.setString(2, p);
 			rs = stmt.executeQuery();
-			/*if(!rs.next()) {
-				JOptionPane.showMessageDialog(null, "Username or Password didn't match", "Failed Authenication", JOptionPane.INFORMATION_MESSAGE);
-				new LoginPage().call();
-			}*/
+			
 			if(rs.next()) {
 				 if(userId == rs.getInt("emp_id") && p.equals(rs.getString("password_hash"))) {
 					 deptId = rs.getInt("dept_id");
@@ -45,9 +45,21 @@ public class Auth {
 				JOptionPane.showMessageDialog(null, "Username or Password didn't match", "Failed Authenication", JOptionPane.INFORMATION_MESSAGE);
 				new LoginPage().call();
 			}
-		}catch(Exception e) {System.out.println("Error is accessing database");}
+		}catch(Exception e) {System.out.println("Error in accessing database");}
 		System.out.println(deptId);
 		
+		try {
+			stmt = con.prepareStatement("select supervisor_id from department where dept_id = ?");
+			stmt.setInt(1, deptId);
+			rs = stmt.executeQuery();	
+			
+			if(rs.next()) {
+				if(userId == rs.getInt("supervisor_id"))
+						new Supervisor();
+				else
+						new Employee();
+			}
+			
+		}catch(Exception e) {System.out.println("Error in accessing database");}
 	}
-
 }
